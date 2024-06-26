@@ -4,30 +4,46 @@ from flask import Flask, request, jsonify
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required
+from flask_migrate import Migrate
+from flask_cors import CORS
+import pandas as pd
+import joblib
 
 # Initialise the flask app
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://youruser:yourpassword@db/yourdb"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["JWT_SECRET_KEY"] = "your_jwt_secret_key"
+CORS(app)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)  # Ensure Migrate is initialized with app and db
+jwt = JWTManager(app)
+
+
+# Load the trained model
+model = joblib.load("tac_predictor_model.pkl")
 
 
 @app.route("/")
 def home():
-    return "Welcome to the Flask API"
+    return "Welcome to the TAC Predictor API!"
 
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    # Replace with actual model logic
-    data = request.json
-    tac = data.get("tac")
-    prediction = {"tac": tac, "prediction": "This is a dummy prediction"}
-    return jsonify(prediction)
-
-
-db = SQLAlchemy(app)
-jwt = JWTManager(app)
+    if request.method == "POST":
+        data = request.get_json(force=True)
+        tac = data["tac"]
+        reportingBodyId = int(tac[:2])
+        manufacturerModelId = int(tac[2:])
+        features = pd.DataFrame(
+            [[reportingBodyId, manufacturerModelId]],
+            columns=["reportingBodyId", "manufacturerModelId"],
+        )
+        prediction = model.predict(features)
+        return jsonify(prediction=prediction.tolist())
+    return jsonify(error="Invalid request method"), 405
 
 
 class User(db.Model):
