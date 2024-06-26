@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 
 
-from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required
 from flask_migrate import Migrate
@@ -21,11 +20,8 @@ migrate = Migrate(app, db)  # Ensure Migrate is initialized with app and db
 jwt = JWTManager(app)
 
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(120), nullable=False)
-
+# Import the models here
+from app.models import User
 
 # Load the trained model
 # model = joblib.load("tac_predictor_model.pkl")
@@ -76,31 +72,6 @@ def dashboard():
 #         prediction = model.predict(features)
 #         return jsonify(prediction=prediction.tolist())
 #     return jsonify(error="Invalid request method"), 405
-
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(120), nullable=False)
-
-
-@app.route("/register", methods=["POST"])
-def register():
-    data = request.json
-    new_user = User(username=data["username"], password=data["password"])
-    db.session.add(new_user)
-    db.session.commit()
-    return jsonify(message="User registered"), 201
-
-
-@app.route("/login", methods=["POST"])
-def login():
-    data = request.json
-    user = User.query.filter_by(username=data["username"]).first()
-    if user and user.password == data["password"]:
-        access_token = create_access_token(identity={"username": user.username})
-        return jsonify(access_token=access_token), 200
-    return jsonify(message="Invalid credentials"), 401
 
 
 if __name__ == "__main__":
