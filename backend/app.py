@@ -62,20 +62,20 @@ def dashboard():
     return jsonify(message="Welcome to the admin dashboard")
 
 
-@app.route("/predict", methods=["POST"])
-def predict():
-    if request.method == "POST":
-        data = request.get_json(force=True)
-        tac = data["tac"]
-        reportingBodyId = int(tac[:2])
-        manufacturerModelId = int(tac[2:])
-        features = pd.DataFrame(
-            [[reportingBodyId, manufacturerModelId]],
-            columns=["reportingBodyId", "manufacturerModelId"],
-        )
-        prediction = model.predict(features)
-        return jsonify(prediction=prediction.tolist())
-    return jsonify(error="Invalid request method"), 405
+# @app.route("/predict", methods=["POST"])
+# def predict():
+#     if request.method == "POST":
+#         data = request.get_json(force=True)
+#         tac = data["tac"]
+#         reportingBodyId = int(tac[:2])
+#         manufacturerModelId = int(tac[2:])
+#         features = pd.DataFrame(
+#             [[reportingBodyId, manufacturerModelId]],
+#             columns=["reportingBodyId", "manufacturerModelId"],
+#         )
+#         prediction = model.predict(features)
+#         return jsonify(prediction=prediction.tolist())
+#     return jsonify(error="Invalid request method"), 405
 
 
 class User(db.Model):
