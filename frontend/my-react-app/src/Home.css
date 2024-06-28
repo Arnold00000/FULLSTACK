@@ -1,0 +1,56 @@
+/* Styling for the Home Component */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f2f5;
+}
+
+.App-header {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #282c34;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 300px;
+    font-size: 1rem;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    background-color: #61dafb;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #21a1f1;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #282c34;
+    margin-top: 20px;
+}

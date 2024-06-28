@@ -1,0 +1,12 @@
+.admin-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.admin-container h1 {
+    color: #333;
+}
+
+.admin-container p {
+    color: #666;
+}

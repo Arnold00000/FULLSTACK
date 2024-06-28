@@ -1,4 +1,131 @@
+/* General styling */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f2f5;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
 .App {
+  text-align: center;
+}
+
+header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+/* Styling for Home Component */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.home-container input {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.home-container button {
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #61dafb;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.home-container button:hover {
+  background-color: #21a1f1;
+}
+
+/* Styling for Admin Component */
+.admin-container {
+  padding: 20px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+.admin-header {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-form input,
+.admin-form textarea {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.admin-form button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #61dafb;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.admin-form button:hover {
+  background-color: #21a1f1;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 600px) {
+  .admin-container {
+    padding: 10px;
+    margin: 20px auto;
+  }
+
+  .home-container {
+    padding: 10px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +162,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

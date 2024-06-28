@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './Home.css'; // Import the Home.css file
+
 
 function App() {
     const [tac, setTac] = useState('');
