@@ -16,7 +16,7 @@ def home():
 def register():
     data = request.get_json()
     new_user = User(
-        username=data["username"], email=data["email"], password=data["password"]
+        username=data["username"], password=data["password"]
     )
     db.session.add(new_user)
     db.session.commit()
